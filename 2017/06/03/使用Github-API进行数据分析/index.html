@@ -87,20 +87,18 @@
 
 
 
-<meta name="description" content="准备工具爬取豆瓣电影需要使用Python的requests和Beautirulsoup这两个库，可以使用pip工具安装，命令如下：pip install BeautifulSoup   pip install requests安装完成后需要测试是否安装成功。">
+<meta name="description" content="使用Github的API请求有关该网站中的Python信息，使用Pygal生成可交互可视化图表。 使用API请求数据在浏览器中输入如下地址获得我们所需要的信息：https://api.github.com/search/repositories?q=language:python&amp;amp;sort=stars该调用会返回Github上的Python项目，还有最受欢迎的Python项目名称，按照所获">
 <meta property="og:type" content="article">
-<meta property="og:title" content="爬取豆瓣电影">
-<meta property="og:url" content="http://yoursite.com/2017/03/21/爬取豆瓣电影/index.html">
+<meta property="og:title" content="使用Github API进行数据分析">
+<meta property="og:url" content="http://yoursite.com/2017/06/03/使用Github-API进行数据分析/index.html">
 <meta property="og:site_name" content="Chendi的小窝">
-<meta property="og:description" content="准备工具爬取豆瓣电影需要使用Python的requests和Beautirulsoup这两个库，可以使用pip工具安装，命令如下：pip install BeautifulSoup   pip install requests安装完成后需要测试是否安装成功。">
-<meta property="og:image" content="http://yoursite.com/img/douban.PNG">
-<meta property="og:image" content="http://yoursite.com/img/movie_tag.png">
-<meta property="og:image" content="http://yoursite.com/img/result.png">
-<meta property="og:updated_time" content="2017-03-21T09:17:32.000Z">
+<meta property="og:description" content="使用Github的API请求有关该网站中的Python信息，使用Pygal生成可交互可视化图表。 使用API请求数据在浏览器中输入如下地址获得我们所需要的信息：https://api.github.com/search/repositories?q=language:python&amp;amp;sort=stars该调用会返回Github上的Python项目，还有最受欢迎的Python项目名称，按照所获">
+<meta property="og:image" content="http://yoursite.com/uploads/python.svg">
+<meta property="og:updated_time" content="2017-06-03T09:26:10.342Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="爬取豆瓣电影">
-<meta name="twitter:description" content="准备工具爬取豆瓣电影需要使用Python的requests和Beautirulsoup这两个库，可以使用pip工具安装，命令如下：pip install BeautifulSoup   pip install requests安装完成后需要测试是否安装成功。">
-<meta name="twitter:image" content="http://yoursite.com/img/douban.PNG">
+<meta name="twitter:title" content="使用Github API进行数据分析">
+<meta name="twitter:description" content="使用Github的API请求有关该网站中的Python信息，使用Pygal生成可交互可视化图表。 使用API请求数据在浏览器中输入如下地址获得我们所需要的信息：https://api.github.com/search/repositories?q=language:python&amp;amp;sort=stars该调用会返回Github上的Python项目，还有最受欢迎的Python项目名称，按照所获">
+<meta name="twitter:image" content="http://yoursite.com/uploads/python.svg">
 
 
 
@@ -128,13 +126,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/03/21/爬取豆瓣电影/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/06/03/使用Github-API进行数据分析/"/>
 
 
 
 
 
-  <title> 爬取豆瓣电影 | Chendi的小窝 </title>
+  <title> 使用Github API进行数据分析 | Chendi的小窝 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -263,7 +261,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/03/21/爬取豆瓣电影/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/使用Github-API进行数据分析/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Chendi">
@@ -284,7 +282,7 @@
             
             
               
-                爬取豆瓣电影
+                使用Github API进行数据分析
               
             
           </h1>
@@ -299,8 +297,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-03-21T17:01:49+08:00">
-                2017-03-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-03T15:03:27+08:00">
+                2017-06-03
               </time>
             
 
@@ -335,10 +333,14 @@
       
 
       
-        <h2 id="准备工具"><a href="#准备工具" class="headerlink" title="准备工具"></a>准备工具</h2><p>爬取豆瓣电影需要使用Python的requests和Beautirulsoup这两个库，可以使用pip工具安装，命令如下：<br><code>pip install BeautifulSoup</code>   <code>pip install requests</code><br>安装完成后需要测试是否安装成功。<br><a id="more"></a></p>
-<h2 id="分析豆瓣电影网站结构"><a href="#分析豆瓣电影网站结构" class="headerlink" title="分析豆瓣电影网站结构"></a>分析豆瓣电影网站结构</h2><p>我爬取的是<a href="https://movie.douban.com/chart" target="_blank" rel="external">https://movie.douban.com/chart</a> 这个地址中的电影信息，使用chrome对网页结构进行分析发现，电影的名字存在于‘pl2’这个标签下。<br><img src="\img\douban.PNG" alt="douban.PNG"></p>
-<h2 id="编写程序"><a href="#编写程序" class="headerlink" title="编写程序"></a>编写程序</h2><p><img src="\img\movie_tag.png" alt="movie_tag.png"></p>
-<h2 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h2><p><img src="\img\result.png" alt="result.png"></p>
+        <p><em>使用Github的API请求有关该网站中的Python信息，使用Pygal生成可交互可视化图表。</em></p>
+<h3 id="使用API请求数据"><a href="#使用API请求数据" class="headerlink" title="使用API请求数据"></a>使用API请求数据</h3><p>在浏览器中输入如下地址获得我们所需要的信息：<code>https://api.github.com/search/repositories?q=language:python&amp;sort=stars</code><br>该调用会返回Github上的Python项目，还有最受欢迎的Python项目名称，按照所获得的星级进行排序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&quot;total_count&quot;: 1727791,</div><div class="line">&quot;incomplete_results&quot;: false,</div><div class="line">&quot;items&quot;: [</div><div class="line">  &#123;</div><div class="line">    &quot;id&quot;: 21289110,</div><div class="line">    &quot;name&quot;: &quot;awesome-python&quot;,</div><div class="line">    &quot;full_name&quot;: &quot;vinta/awesome-python&quot;,</div><div class="line">    &quot;owner&quot;: &#123;</div><div class="line">      &quot;login&quot;: &quot;vinta&quot;,</div><div class="line">      &quot;id&quot;: 652070,</div><div class="line">         &#125;,</div></pre></td></tr></table></figure></p>
+<p>返回了JSON格式信息，我们可以使用json()方法将信息转换成Python的字典，并存储在response_dict字典中。</p>
+<h3 id="使用Requests库进行处理"><a href="#使用Requests库进行处理" class="headerlink" title="使用Requests库进行处理"></a>使用Requests库进行处理</h3><p>获取Python项目总数量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">import requests</div><div class="line">url = &apos;https://api.github.com/search/repositories?q=language:python&amp;sort=stars&apos;</div><div class="line">r = requests.get(url)</div><div class="line">response_dict = r.json()</div><div class="line">print(&quot;总项目数量:&quot;,response_dict[&apos;total_count&apos;])</div><div class="line">总项目数量: 1727822</div></pre></td></tr></table></figure></p>
+<h3 id="获得最受欢迎的项目信息"><a href="#获得最受欢迎的项目信息" class="headerlink" title="获得最受欢迎的项目信息"></a>获得最受欢迎的项目信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">repos = response_dict[&apos;items&apos;]</div><div class="line">print(&apos;打印项目信息:&apos;)</div><div class="line">for repo in repos:</div><div class="line">    print(&apos;\nName:&apos;,repo[&apos;name&apos;])#项目名称</div><div class="line">    print(&apos;\nOwner:&apos;,repo[&apos;owner&apos;][&apos;login&apos;])#项目拥有者</div><div class="line">    print(&apos;\nStars:&apos;,repo[&apos;stargazers_count&apos;])#星级数目</div><div class="line">    print(&apos;\nUrl:&apos;,repo[&apos;html_url&apos;])#项目的Url</div><div class="line">    print(&apos;\nDescription:&apos;,repo[&apos;description&apos;])#项目描述</div></pre></td></tr></table></figure>
+<p>上述的代码就可以获得我们需要的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">打印项目信息:</div><div class="line"></div><div class="line">Name: awesome-python</div><div class="line"></div><div class="line">Owner: vinta</div><div class="line"></div><div class="line">Stars: 34583</div><div class="line"></div><div class="line">Url: https://github.com/vinta/awesome-python</div><div class="line"></div><div class="line">Description: A curated list of awesome Python frameworks, libraries, software and resources</div><div class="line"></div><div class="line">Name: httpie</div><div class="line"></div><div class="line">Owner: jakubroztocil</div><div class="line"></div><div class="line">Stars: 29887</div><div class="line"></div><div class="line">Url: https://github.com/jakubroztocil/httpie</div><div class="line"></div><div class="line">Description: Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc.  https://httpie.org</div></pre></td></tr></table></figure></p>
+<h3 id="使用Pygal进行可视化"><a href="#使用Pygal进行可视化" class="headerlink" title="使用Pygal进行可视化"></a>使用Pygal进行可视化</h3><p>使用pip命令安装Pygal库，<code>pip install pygal</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import pygal</div><div class="line">from pygal.style import LightColorizedStyle as LCS,LightenStyle as LS</div><div class="line">name,stars = [],[]</div><div class="line">#创建两个列表来存储名字和星数</div><div class="line">for repo in repos:</div><div class="line">    name.append(repo[&apos;name&apos;])</div><div class="line">    stars.append(repo[&apos;stargazers_count&apos;])</div><div class="line">#创建样式</div><div class="line">my_style = LS(&apos;#333366&apos;,base_style=LCS)</div><div class="line">chart = pygal.Bar(style=my_style,x_label_rotation=45,show_legend=False)</div><div class="line">chart.title = &apos;Python Project&apos;#名称</div><div class="line">chart.x_labels = name#横坐标为项目名称</div><div class="line">chart.add(&apos;&apos;,stars)</div><div class="line">chart.render_to_file(&apos;python.svg&apos;)</div></pre></td></tr></table></figure></p>
+<p><img src="/uploads/python.svg" alt="python.svg"></p>
 
       
     </div>
@@ -375,8 +377,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/03/17/Python中的数据结构/" rel="next" title="Python中的数据结构">
-                <i class="fa fa-chevron-left"></i> Python中的数据结构
+              <a href="/2017/05/30/使用Github+Hexo创建Blog/" rel="next" title="使用Github+Hexo创建Blog">
+                <i class="fa fa-chevron-left"></i> 使用Github+Hexo创建Blog
               </a>
             
           </div>
@@ -384,10 +386,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/05/30/使用Github+Hexo创建Blog/" rel="prev" title="使用Github+Hexo创建Blog">
-                使用Github+Hexo创建Blog <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -518,7 +516,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#准备工具"><span class="nav-number">1.</span> <span class="nav-text">准备工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析豆瓣电影网站结构"><span class="nav-number">2.</span> <span class="nav-text">分析豆瓣电影网站结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编写程序"><span class="nav-number">3.</span> <span class="nav-text">编写程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结果"><span class="nav-number">4.</span> <span class="nav-text">结果</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#使用API请求数据"><span class="nav-number">1.</span> <span class="nav-text">使用API请求数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Requests库进行处理"><span class="nav-number">2.</span> <span class="nav-text">使用Requests库进行处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获得最受欢迎的项目信息"><span class="nav-number">3.</span> <span class="nav-text">获得最受欢迎的项目信息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Pygal进行可视化"><span class="nav-number">4.</span> <span class="nav-text">使用Pygal进行可视化</span></a></li></ol></div>
             
 
           </div>

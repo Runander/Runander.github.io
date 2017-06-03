@@ -260,6 +260,134 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/06/03/使用Github-API进行数据分析/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Chendi">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Chendi的小窝">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2017/06/03/使用Github-API进行数据分析/" itemprop="url">
+                  使用Github API进行数据分析
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-03T15:03:27+08:00">
+                2017-06-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><em>使用Github的API请求有关该网站中的Python信息，使用Pygal生成可交互可视化图表。</em></p>
+<h3 id="使用API请求数据"><a href="#使用API请求数据" class="headerlink" title="使用API请求数据"></a>使用API请求数据</h3><p>在浏览器中输入如下地址获得我们所需要的信息：<code>https://api.github.com/search/repositories?q=language:python&amp;sort=stars</code><br>该调用会返回Github上的Python项目，还有最受欢迎的Python项目名称，按照所获得的星级进行排序。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&quot;total_count&quot;: 1727791,</div><div class="line">&quot;incomplete_results&quot;: false,</div><div class="line">&quot;items&quot;: [</div><div class="line">  &#123;</div><div class="line">    &quot;id&quot;: 21289110,</div><div class="line">    &quot;name&quot;: &quot;awesome-python&quot;,</div><div class="line">    &quot;full_name&quot;: &quot;vinta/awesome-python&quot;,</div><div class="line">    &quot;owner&quot;: &#123;</div><div class="line">      &quot;login&quot;: &quot;vinta&quot;,</div><div class="line">      &quot;id&quot;: 652070,</div><div class="line">         &#125;,</div></pre></td></tr></table></figure></p>
+<p>返回了JSON格式信息，我们可以使用json()方法将信息转换成Python的字典，并存储在response_dict字典中。</p>
+<h3 id="使用Requests库进行处理"><a href="#使用Requests库进行处理" class="headerlink" title="使用Requests库进行处理"></a>使用Requests库进行处理</h3><p>获取Python项目总数量：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">import requests</div><div class="line">url = &apos;https://api.github.com/search/repositories?q=language:python&amp;sort=stars&apos;</div><div class="line">r = requests.get(url)</div><div class="line">response_dict = r.json()</div><div class="line">print(&quot;总项目数量:&quot;,response_dict[&apos;total_count&apos;])</div><div class="line">总项目数量: 1727822</div></pre></td></tr></table></figure></p>
+<h3 id="获得最受欢迎的项目信息"><a href="#获得最受欢迎的项目信息" class="headerlink" title="获得最受欢迎的项目信息"></a>获得最受欢迎的项目信息</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">repos = response_dict[&apos;items&apos;]</div><div class="line">print(&apos;打印项目信息:&apos;)</div><div class="line">for repo in repos:</div><div class="line">    print(&apos;\nName:&apos;,repo[&apos;name&apos;])#项目名称</div><div class="line">    print(&apos;\nOwner:&apos;,repo[&apos;owner&apos;][&apos;login&apos;])#项目拥有者</div><div class="line">    print(&apos;\nStars:&apos;,repo[&apos;stargazers_count&apos;])#星级数目</div><div class="line">    print(&apos;\nUrl:&apos;,repo[&apos;html_url&apos;])#项目的Url</div><div class="line">    print(&apos;\nDescription:&apos;,repo[&apos;description&apos;])#项目描述</div></pre></td></tr></table></figure>
+<p>上述的代码就可以获得我们需要的信息。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">打印项目信息:</div><div class="line"></div><div class="line">Name: awesome-python</div><div class="line"></div><div class="line">Owner: vinta</div><div class="line"></div><div class="line">Stars: 34583</div><div class="line"></div><div class="line">Url: https://github.com/vinta/awesome-python</div><div class="line"></div><div class="line">Description: A curated list of awesome Python frameworks, libraries, software and resources</div><div class="line"></div><div class="line">Name: httpie</div><div class="line"></div><div class="line">Owner: jakubroztocil</div><div class="line"></div><div class="line">Stars: 29887</div><div class="line"></div><div class="line">Url: https://github.com/jakubroztocil/httpie</div><div class="line"></div><div class="line">Description: Modern command line HTTP client – user-friendly curl alternative with intuitive UI, JSON support, syntax highlighting, wget-like downloads, extensions, etc.  https://httpie.org</div></pre></td></tr></table></figure></p>
+<h3 id="使用Pygal进行可视化"><a href="#使用Pygal进行可视化" class="headerlink" title="使用Pygal进行可视化"></a>使用Pygal进行可视化</h3><p>使用pip命令安装Pygal库，<code>pip install pygal</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">import pygal</div><div class="line">from pygal.style import LightColorizedStyle as LCS,LightenStyle as LS</div><div class="line">name,stars = [],[]</div><div class="line">#创建两个列表来存储名字和星数</div><div class="line">for repo in repos:</div><div class="line">    name.append(repo[&apos;name&apos;])</div><div class="line">    stars.append(repo[&apos;stargazers_count&apos;])</div><div class="line">#创建样式</div><div class="line">my_style = LS(&apos;#333366&apos;,base_style=LCS)</div><div class="line">chart = pygal.Bar(style=my_style,x_label_rotation=45,show_legend=False)</div><div class="line">chart.title = &apos;Python Project&apos;#名称</div><div class="line">chart.x_labels = name#横坐标为项目名称</div><div class="line">chart.add(&apos;&apos;,stars)</div><div class="line">chart.render_to_file(&apos;python.svg&apos;)</div></pre></td></tr></table></figure></p>
+<p><img src="/uploads/python.svg" alt="python.svg"></p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/30/使用Github+Hexo创建Blog/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -804,7 +932,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
